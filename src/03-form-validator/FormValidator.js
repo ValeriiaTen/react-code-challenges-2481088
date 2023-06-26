@@ -21,7 +21,6 @@ export default function FormValidator () {
 
   const handleSubmit = e => {
     e.preventDefault()
-
     const errors = findErrors()
     setMessage(errors.length ? errors.join(', ') : 'User created!')
   }
