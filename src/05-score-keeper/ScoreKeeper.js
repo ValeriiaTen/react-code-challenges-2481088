@@ -1,13 +1,28 @@
-import { useEffect, useState } from 'react'
 
-export default function ScoreKeeper () {
-  const [score, setScore] = useState(0)
+import React, { useEffect, useState } from 'react';
+
+const ScoreKeeper = () => {
+  const [score, setScore] = useState(() => parseInt(localStorage.getItem('score')) || 0);
+
+  useEffect(() => {
+    localStorage.setItem('score', score.toString());
+  }, [score]);
+
+  const incrementScore = () => {
+    setScore(prevScore => prevScore + 1);
+  };
+
+  const decrementScore = () => {
+    setScore(prevScore => prevScore - 1);
+  };
 
   return (
     <div>
       <h1>Your score is: {score}</h1>
-      <button onClick={() => setScore(prevScore => prevScore + 1)}>+</button>
-      <button onClick={() => setScore(prevScore => prevScore - 1)}>-</button>
+      <button onClick={incrementScore}>+</button>
+      <button onClick={decrementScore}>-</button>
     </div>
-  )
-}
+  );
+};
+
+export default ScoreKeeper;
